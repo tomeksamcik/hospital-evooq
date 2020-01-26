@@ -12,7 +12,7 @@ import org.jeasy.rules.annotation.Rule;
 @Rule(description = "Spaghetti Monster revives dead man")
 public class FlyingSpaghettiMonsterRule {
 
-    public static final int RESURRECTION_CHANCE_ONE_IN = 100_000;
+    public static final int RESURRECTION_CHANCE_ONE_IN = 1_000_000;
 
     @org.jeasy.rules.annotation.Condition
     public boolean canPatientBeResurrected(@Fact("patient") Patient patient, @Fact("cures") List<Cure> cures) {
