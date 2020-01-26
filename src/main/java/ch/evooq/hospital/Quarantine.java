@@ -49,12 +49,12 @@ class Quarantine {
     }
 
     String cure() {
-        for (Patient patient : patients) {
+        patients.stream().map(p -> {
             Facts facts = new Facts();
-            facts.put("patient", patient);
+            facts.put("patient", p);
             facts.put("cures", cures);
-            rulesEngine.fire(rules, facts);
-        }
+            return facts;
+        }).forEach(facts -> rulesEngine.fire(rules, facts));
         return report();
     }
 
