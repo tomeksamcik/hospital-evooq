@@ -36,8 +36,7 @@ class Quarantine {
         this.rulesEngine = rulesEngine;
 
         Arrays.stream(subjects.orElse("").split(","))
-                .forEach(
-                        p -> Condition.get(p).ifPresent(condition -> patients.add(new Patient(condition))));
+                .forEach(p -> Condition.get(p).ifPresent(condition -> patients.add(new Patient(condition))));
         Arrays.stream(curesCodes.orElse("").split(","))
                 .forEach(c -> Cure.get(c).ifPresent(cure -> cures.add(cure)));
 
