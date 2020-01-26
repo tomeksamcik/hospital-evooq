@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 class Reporter {
@@ -18,8 +17,7 @@ class Reporter {
         Arrays.stream(Condition.values())
                 .forEach((Condition p) -> output.put(p.getCode(), 0l));
         patients.stream()
-                .map(p -> p.getCondition().getCode())
-                .collect(groupingBy(Function.identity(),
+                .collect(groupingBy(p -> p.getCondition().getCode(),
                         Collectors.counting()))
                 .forEach((k, v) -> output.merge(k, v, (v1, v2) -> v2));
         return String.join(",", output.keySet().stream()
