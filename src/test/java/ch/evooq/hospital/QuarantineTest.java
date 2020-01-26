@@ -185,7 +185,6 @@ public class QuarantineTest {
                     .range(0, FlyingSpaghettiMonsterRule.RESURRECTION_CHANCE_ONE_IN * EXECUTION_MULTIPLIER)
                     .mapToObj(i -> Try.ofFailable(() -> {
                         quarantine = new Quarantine(Some("X"), Some(""), ctx.getRulesEngine(), ctx.getRules());
-                        quarantine.cure();
                         return quarantine.cure();
                     }).recover(e -> ""))
                     .collect(Collectors.toList());
