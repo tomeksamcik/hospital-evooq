@@ -41,7 +41,7 @@ Aspirin and Insulin.
 
 ## Notes
 
-- Application is using Java 8
+- Application is using Java 8 as it's my default JDK and I didn't find updates from 9, 10 and 11 all that useful in the given code base
 - Jacoco test report is available after running tests in `build/reports/tests` directory
 - Main logic is based on [EasyRule](https://github.com/j-easy/easy-rules) rules engine
 - Results of different test scenarios depend on the order in which rules are applied (their priorities)
