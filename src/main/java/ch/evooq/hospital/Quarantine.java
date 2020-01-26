@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.jeasy.rules.api.Facts;
-import org.jeasy.rules.api.Rules;
-import org.jeasy.rules.api.RulesEngine;
 
 class InvalidInputException extends Exception {
 
@@ -23,18 +21,15 @@ class InvalidInputException extends Exception {
 @Slf4j
 class Quarantine {
 
-    private final Rules rules;
-
-    private final RulesEngine rulesEngine;
+    private final RulesContext rulesContext;
 
     private final List<Cure> cures = new ArrayList<>();
 
     private final List<Patient> patients = new ArrayList<>();
 
-    Quarantine(Optional<String> subjects, Optional<String> curesCodes, RulesContext ctx)
+    Quarantine(Optional<String> subjects, Optional<String> curesCodes, RulesContext rulesContext)
             throws InvalidInputException {
-        this.rules = ctx.getRules();
-        this.rulesEngine = ctx.getRulesEngine();
+        this.rulesContext = rulesContext;
 
         Arrays.stream(subjects.orElse("").split(","))
                 .forEach(p -> Condition.get(p).ifPresent(condition -> patients.add(new Patient(condition))));
@@ -54,7 +49,7 @@ class Quarantine {
             facts.put("patient", p);
             facts.put("cures", cures);
             return facts;
-        }).forEach(facts -> rulesEngine.fire(rules, facts));
+        }).forEach(facts -> rulesContext.apply(facts));
         return report();
     }
 
