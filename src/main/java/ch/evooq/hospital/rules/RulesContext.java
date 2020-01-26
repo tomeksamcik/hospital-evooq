@@ -18,7 +18,7 @@ public class RulesContext {
         registerRules();
     }
 
-    public void apply(Patient p, List<Cure> cures) {
+    public void applyRules(Patient p, List<Cure> cures) {
         Facts facts = new Facts();
         facts.put("patient", p);
         facts.put("cures", cures);

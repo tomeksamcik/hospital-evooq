@@ -43,7 +43,7 @@ class Quarantine {
     }
 
     String cure() {
-        patients.stream().forEach(p -> rulesContext.apply(p, cures));
+        patients.stream().forEach(p -> rulesContext.applyRules(p, cures));
         return report();
     }
 
