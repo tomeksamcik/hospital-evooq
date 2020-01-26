@@ -17,6 +17,7 @@ project.ext {
     log4jVersion = "1.2.17"
     slf4jVersion = "1.7.25"
     lombokVersion = "1.18.10"
+    betterMonadsVersion = "0.4.1"
     mainClass = "ch.evooq.hospital.Main"
 }
 
@@ -29,7 +30,7 @@ dependencies {
     compile("org.slf4j:slf4j-api:$slf4jVersion")
     compile("org.slf4j:slf4j-log4j12:$slf4jVersion")
     compile("org.jeasy:easy-rules-core:$easyRulesVersion")
-    compile("com.jason-goodwin:better-monads:0.4.1")
+    compile("com.jason-goodwin:better-monads:$betterMonadsVersion")
     compileOnly("org.projectlombok:lombok:$lombokVersion")
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")
     testImplementation("org.hamcrest:hamcrest:$hamcrestVersion")
