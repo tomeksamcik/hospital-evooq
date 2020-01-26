@@ -22,7 +22,7 @@ public class Main {
         return Try.ofFailable(() -> {
             Quarantine quarantine = new Quarantine(subjects, cures, ctx.getRulesEngine(), ctx.getRules());
             return quarantine.cure();
-        }).recover(e -> ERROR_MESSAGE);
+        }).recover(e -> String.format("%s. %s", e.getMessage(), ERROR_MESSAGE));
     }
 
     private Optional<String> parseArgument(int idx, String... args) {
