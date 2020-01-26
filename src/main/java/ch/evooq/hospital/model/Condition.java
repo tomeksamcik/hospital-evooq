@@ -1,9 +1,9 @@
 package ch.evooq.hospital.model;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.Getter;
 
 public enum Condition {
@@ -12,11 +12,8 @@ public enum Condition {
     @Getter
     private String code;
 
-    private static final Map<String, Condition> lookup = new HashMap<>();
-
-    static {
-        Arrays.stream(Condition.values()).forEach(c -> lookup.put(c.getCode(), c));
-    }
+    private static final Map<String, Condition> lookup = Arrays.stream(Condition.values())
+            .collect(Collectors.toMap(c -> c.getCode(), c -> c));
 
     Condition(String code) {
         this.code = code;

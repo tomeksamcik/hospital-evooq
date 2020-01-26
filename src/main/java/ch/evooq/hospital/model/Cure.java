@@ -1,9 +1,9 @@
 package ch.evooq.hospital.model;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -14,11 +14,8 @@ public enum Cure {
     @Getter
     private final String code;
 
-    private static final Map<String, Cure> lookup = new HashMap<>();
-
-    static {
-        Arrays.stream(Cure.values()).forEach(c -> lookup.put(c.getCode(), c));
-    }
+    private static final Map<String, Cure> lookup = Arrays.stream(Cure.values())
+            .collect(Collectors.toMap(c -> c.getCode(), c -> c));
 
     public static Optional<Cure> get(String code) {
         return Optional.ofNullable(lookup.get(code));
