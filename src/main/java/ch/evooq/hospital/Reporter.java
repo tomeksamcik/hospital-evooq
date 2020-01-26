@@ -17,11 +17,11 @@ class Reporter {
         Map<String, Long> output = new LinkedHashMap();
         Arrays.stream(Condition.values())
                 .forEach((Condition p) -> output.put(p.getCode(), 0l));
-        Map<String, Long> map = patients.stream()
+        patients.stream()
                 .map(p -> p.getCondition().getCode())
                 .collect(groupingBy(Function.identity(),
-                        Collectors.counting()));
-        map.forEach((k, v) -> output.merge(k, v, (v1, v2) -> v2));
+                        Collectors.counting()))
+                .forEach((k, v) -> output.merge(k, v, (v1, v2) -> v2));
         return String.join(",", output.keySet().stream()
                 .map(k -> k + ":" + output.get(k))
                 .collect(Collectors.toList()));
