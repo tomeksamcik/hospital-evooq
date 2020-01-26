@@ -1,5 +1,8 @@
 package ch.evooq.hospital.rules;
 
+import ch.evooq.hospital.model.Cure;
+import ch.evooq.hospital.model.Patient;
+import java.util.List;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rules;
 import org.jeasy.rules.api.RulesEngine;
@@ -15,7 +18,10 @@ public class RulesContext {
         registerRules();
     }
 
-    public void apply(Facts facts) {
+    public void apply(Patient p, List<Cure> cures) {
+        Facts facts = new Facts();
+        facts.put("patient", p);
+        facts.put("cures", cures);
         rulesEngine.fire(rules, facts);
     }
 

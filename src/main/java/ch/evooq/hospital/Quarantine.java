@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
-import org.jeasy.rules.api.Facts;
 
 class InvalidInputException extends Exception {
 
@@ -44,12 +43,7 @@ class Quarantine {
     }
 
     String cure() {
-        patients.stream().map(p -> {
-            Facts facts = new Facts();
-            facts.put("patient", p);
-            facts.put("cures", cures);
-            return facts;
-        }).forEach(facts -> rulesContext.apply(facts));
+        patients.stream().forEach(p -> rulesContext.apply(p, cures));
         return report();
     }
 
