@@ -1,6 +1,5 @@
 package ch.evooq.hospital.rules;
 
-import lombok.Getter;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rules;
 import org.jeasy.rules.api.RulesEngine;
@@ -8,10 +7,8 @@ import org.jeasy.rules.core.DefaultRulesEngine;
 
 public class RulesContext {
 
-    @Getter
     private final Rules rules = new Rules();
 
-    @Getter
     private final RulesEngine rulesEngine = new DefaultRulesEngine();
 
     public RulesContext() {
