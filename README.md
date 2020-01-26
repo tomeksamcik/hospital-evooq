@@ -42,6 +42,7 @@ Aspirin and Insulin.
 ## Notes
 
 - Application is using Java 8
+- Jacoco test report is available after running tests in `build/reports/tests` directory
 - Main logic is based on [EasyRule](https://github.com/j-easy/easy-rules) rules engine
 - Results of different test scenarios depend on the order in which rules are applied (their priorities)
   - For ex.: Patient with Tuberculosis cured with Insulin, Antibiotic and Paracetamol can either:
