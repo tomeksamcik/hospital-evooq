@@ -49,7 +49,7 @@ Aspirin and Insulin.
     - Heal Tuberculosis with Antibiotic, get Fever from Insulin and Antibiotic and heal Fever with Paracetamol OR
     - Get Paracetamol with no effect, heal Tuberculosis with Antibiotic and get Fever from Insulin and Antibiotic
 - Since it was not explicitly specified in what order rules should be applied and common sense doesn't give any clear answer either I assumed order in which they were specified in the problem description document
-- Because of large number of iterations that testDeadBecomesHealthy does, it takes relatively long to run it, time can be significantly shortened by turning off debug logs
+- Because of a large number of iterations that `testDeadBecomesHealthy` does, it takes relatively long to run it, time can be significantly shortened by turning off debug logs
 - `testDeadBecomesHealthy` is not guaranteed to pass, it is only statistically likely. In order to increase stability, it's enough to set `EXECUTION_MULTIPLIER` in test to a greater value.
 - [EasyRule](https://github.com/j-easy/easy-rules) engine can be configured with couple of options changing rules matching logic:
   - The `skipOnFirstAppliedRule` parameter tells the engine to skip next rules when a rule is applied
