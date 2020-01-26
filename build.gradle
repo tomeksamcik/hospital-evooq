@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+    id "com.github.johnrengelman.shadow" version "5.1.0"
+}
+
+group 'ch.evooq'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+project.ext {
+    junitVersion = "5.6.0"
+    hamcrestVersion = "2.2"
+    betterMonadsVersion = "0.4.0"
+    easyRulesVersion = "3.4.0"
+    log4jVersion = "1.2.17"
+    slf4jVersion = "1.7.25"
+    lombokVersion = "1.18.10"
+    mainClass = "ch.evooq.hospital.Main"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("log4j:log4j:$log4jVersion")
+    compile("org.slf4j:slf4j-api:$slf4jVersion")
+    compile("org.slf4j:slf4j-log4j12:$slf4jVersion")
+    compile("org.jeasy:easy-rules-core:$easyRulesVersion")
+    compile("com.jason-goodwin:better-monads:0.4.1")
+    compileOnly("org.projectlombok:lombok:$lombokVersion")
+    annotationProcessor("org.projectlombok:lombok:$lombokVersion")
+    testImplementation("org.hamcrest:hamcrest:$hamcrestVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "$mainClass"
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
