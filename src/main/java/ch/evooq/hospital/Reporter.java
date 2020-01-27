@@ -20,8 +20,8 @@ class Reporter {
                 .collect(groupingBy(p -> p.getCondition().getCode(),
                         Collectors.counting()))
                 .forEach((k, v) -> output.merge(k, v, (v1, v2) -> v2));
-        return String.join(",", output.keySet().stream()
-                .map(k -> k + ":" + output.get(k))
+        return String.join(",", output.entrySet().stream()
+                .map(e -> String.join(":", e.getKey(), e.getValue().toString()))
                 .collect(Collectors.toList()));
     }
 }
