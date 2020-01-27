@@ -30,16 +30,24 @@ class Quarantine {
             throws InvalidInputException {
         this.rulesContext = rulesContext;
 
-        Arrays.stream(subjects.orElse("").split(","))
-                .forEach(p -> Condition.get(p).ifPresent(condition -> patients.add(new Patient(condition))));
-        Arrays.stream(curesCodes.orElse("").split(","))
-                .forEach(c -> Cure.get(c).ifPresent(cure -> cures.add(cure)));
+        parsePatients(subjects);
+        parseCures(curesCodes);
 
         if (patients.isEmpty()) {
             throw new InvalidInputException();
         }
 
         log.debug("Patients: {}, Cures: {}", patients, cures);
+    }
+
+    private void parsePatients(Optional<String> subjects) {
+        Arrays.stream(subjects.orElse("").split(","))
+                .forEach(p -> Condition.get(p).ifPresent(condition -> patients.add(new Patient(condition))));
+    }
+
+    private void parseCures(Optional<String> curesCodes) {
+        Arrays.stream(curesCodes.orElse("").split(","))
+                .forEach(c -> Cure.get(c).ifPresent(cure -> cures.add(cure)));
     }
 
     String cure() {

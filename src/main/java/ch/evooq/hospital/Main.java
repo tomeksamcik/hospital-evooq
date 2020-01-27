@@ -15,7 +15,7 @@ public class Main {
             "● F, H, D, T, X are patients’ health status codes;\n" +
             "● NP is a number of patients for a given state;";
 
-    public String init() {
+    private String init() {
         RulesContext ctx = new RulesContext();
         Optional<String> cures = parseArgument(2, args);
         Optional<String> subjects = parseArgument(1, args);
