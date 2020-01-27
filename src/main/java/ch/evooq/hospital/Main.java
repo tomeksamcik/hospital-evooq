@@ -19,10 +19,8 @@ public class Main {
         RulesContext ctx = new RulesContext();
         Optional<String> cures = parseArgument(2, args);
         Optional<String> subjects = parseArgument(1, args);
-        return Try.ofFailable(() -> {
-            Quarantine quarantine = new Quarantine(subjects, cures, ctx);
-            return quarantine.cure();
-        }).recover(e -> String.format("%s. %s", e.getMessage(), ERROR_MESSAGE));
+        return Try.ofFailable(() -> new Quarantine(subjects, cures, ctx).cure())
+                .recover(e -> String.format("%s. %s", e.getMessage(), ERROR_MESSAGE));
     }
 
     private Optional<String> parseArgument(int idx, String... args) {
