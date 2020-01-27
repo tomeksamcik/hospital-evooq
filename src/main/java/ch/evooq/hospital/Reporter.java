@@ -21,7 +21,7 @@ class Reporter {
                         Collectors.counting()))
                 .forEach((k, v) -> output.merge(k, v, (v1, v2) -> v2));
         return String.join(",", output.entrySet().stream()
-                .map(e -> String.join(":", e.getKey(), e.getValue().toString()))
+                .map(e -> e.getKey() + ":" + e.getValue())
                 .collect(Collectors.toList()));
     }
 }
