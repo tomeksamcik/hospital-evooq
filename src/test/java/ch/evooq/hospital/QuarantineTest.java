@@ -27,7 +27,7 @@ public class QuarantineTest {
     /*
     Not Java convention, but Emulating Scala
      */
-    private Optional<String> Some(String str) {
+    public static Optional<String> Some(String str) {
         return Optional.of(str);
     }
 
