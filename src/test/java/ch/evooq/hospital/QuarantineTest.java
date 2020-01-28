@@ -183,10 +183,8 @@ public class QuarantineTest {
             Logger.getRootLogger().setLevel(Level.toLevel("OFF"));
             List<String> results = IntStream
                     .range(0, FlyingSpaghettiMonsterRule.RESURRECTION_CHANCE_ONE_IN * EXECUTION_MULTIPLIER)
-                    .mapToObj(i -> Try.ofFailable(() -> {
-                        quarantine = new Quarantine(Some("X"), Some(""), ctx);
-                        return quarantine.cure();
-                    }).recover(e -> ""))
+                    .mapToObj(i -> Try.ofFailable(() -> new Quarantine(Some("X"), Some(""), ctx).cure())
+                            .recover(e -> ""))
                     .collect(Collectors.toList());
             assertThat(results, hasItem("F:0,H:1,D:0,T:0,X:0"));
         }
