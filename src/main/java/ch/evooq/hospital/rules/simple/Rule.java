@@ -16,13 +16,13 @@ public class Rule {
     @Getter
     private final String description;
 
-    private final Consumer<Patient> action;
+    private final Consumer<Patient> then;
 
-    private final BiPredicate<Patient, List<Cure>> condition;
+    private final BiPredicate<Patient, List<Cure>> when;
 
     public void apply(Patient patient, List<Cure> cures) {
-        if (condition.test(patient, cures)) {
-            action.accept(patient);
+        if (when.test(patient, cures)) {
+            then.accept(patient);
         }
     }
 }

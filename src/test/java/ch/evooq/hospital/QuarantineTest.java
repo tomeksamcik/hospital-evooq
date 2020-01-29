@@ -111,14 +111,14 @@ public class QuarantineTest {
         }
 
         @Test
-        @DisplayName("That is healthy will catch Fever when treated with Insulin and Antibiotic")
+        @DisplayName("That is healthy will catch Fever then treated with Insulin and Antibiotic")
         public void testIfInsulinIsMixedWithAntibioticHealthyPeopleCatchFever() throws InvalidInputException {
             quarantine = new Quarantine(Some("H"), Some("I,An"), ctx);
             assertThat(quarantine.cure(), equalTo("F:1,H:0,D:0,T:0,X:0"));
         }
 
         @Test
-        @DisplayName("Will die when cured with Paracetamol and Aspirin")
+        @DisplayName("Will die then cured with Paracetamol and Aspirin")
         public void testParacetamolKillsSubjectIfMixedWithAspirin() throws InvalidInputException {
             quarantine = new Quarantine(Some("H"), Some("P,As"), ctx);
             assertThat(quarantine.cure(), equalTo("F:0,H:0,D:0,T:0,X:1"));
@@ -143,7 +143,7 @@ public class QuarantineTest {
         The assumption here is that InsulinAntibioticRule is applied first.
          */
         @Test
-        @DisplayName("That is Healthy will first catch Fever and then recover when treated with Insulin, Paracetamol and Antibiotic ")
+        @DisplayName("That is Healthy will first catch Fever and then recover then treated with Insulin, Paracetamol and Antibiotic ")
         public void testInsulinWithAntibioticWithParacetamolOnHealty() throws InvalidInputException {
             quarantine = new Quarantine(Some("H"), Some("I,An,P"), ctx);
             assertThat(quarantine.cure(), equalTo("F:0,H:1,D:0,T:0,X:0"));
