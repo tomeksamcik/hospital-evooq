@@ -1,5 +1,6 @@
 package ch.evooq.hospital;
 
+import ch.evooq.hospital.rules.RulesContext;
 import ch.evooq.hospital.rules.simple.SimpleRulesContext;
 import com.jasongoodwin.monads.Try;
 import java.util.Optional;
@@ -16,7 +17,7 @@ public class Main {
             "● NP is a number of patients for a given state;";
 
     public String init() {
-        SimpleRulesContext ctx = new SimpleRulesContext();
+        RulesContext ctx = new SimpleRulesContext();
         Optional<String> cures = parseArgument(2, args);
         Optional<String> subjects = parseArgument(1, args);
         return Try.ofFailable(() -> new Quarantine(subjects, cures, ctx).cure())
