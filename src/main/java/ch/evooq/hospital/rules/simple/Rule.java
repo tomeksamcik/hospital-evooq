@@ -13,10 +13,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class Rule {
 
-    private final Patient patient;
-
-    private final List<Cure> cures;
-
     @Getter
     private final String description;
 
