@@ -1,6 +1,5 @@
 package ch.evooq.hospital.rules;
 
-import static ch.evooq.hospital.model.Condition.Dead;
 import static ch.evooq.hospital.model.Condition.Healthy;
 
 import ch.evooq.hospital.model.Cure;
@@ -18,7 +17,7 @@ public class FlyingSpaghettiMonsterRule {
 
     @org.jeasy.rules.annotation.Condition
     public boolean canPatientBeResurrected(@Fact("patient") Patient patient, @Fact("cures") List<Cure> cures) {
-        return patient.has(Dead) &&
+        return patient.isDead() &&
                 miracleHappens();
     }
 

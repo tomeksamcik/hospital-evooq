@@ -1,7 +1,6 @@
 package ch.evooq.hospital.rules;
 
 import static ch.evooq.hospital.model.Condition.Fever;
-import static ch.evooq.hospital.model.Condition.Healthy;
 import static ch.evooq.hospital.model.Cure.Antibiotic;
 import static ch.evooq.hospital.model.Cure.Insulin;
 
@@ -19,7 +18,7 @@ public class InsulinAntibioticRule {
     public boolean canPatientGetFever(@Fact("patient") Patient patient, @Fact("cures") List<Cure> cures) {
         return cures.contains(Insulin) &&
                 cures.contains(Antibiotic) &&
-                patient.has(Healthy);
+                patient.isHealthy();
     }
 
     @Action
