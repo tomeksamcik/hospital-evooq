@@ -30,7 +30,6 @@ class Quarantine {
     Quarantine(Optional<String> subjects, Optional<String> curesCodes, RulesContext rulesContext)
             throws InvalidInputException {
         this.rulesContext = rulesContext;
-
         this.patients = parsePatients(subjects);
         this.cures = parseCures(curesCodes);
 

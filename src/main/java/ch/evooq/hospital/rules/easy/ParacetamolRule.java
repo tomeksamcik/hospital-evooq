@@ -1,4 +1,4 @@
-package ch.evooq.hospital.rules;
+package ch.evooq.hospital.rules.easy;
 
 import static ch.evooq.hospital.model.Condition.Fever;
 import static ch.evooq.hospital.model.Condition.Healthy;

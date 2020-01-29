@@ -4,8 +4,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsIterableContaining.hasItem;
 
-import ch.evooq.hospital.rules.FlyingSpaghettiMonsterRule;
-import ch.evooq.hospital.rules.RulesContext;
+import ch.evooq.hospital.rules.easy.FlyingSpaghettiMonsterRule;
+import ch.evooq.hospital.rules.simple.SimpleRulesContext;
 import com.jasongoodwin.monads.Try;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +22,7 @@ public class QuarantineTest {
 
     private Quarantine quarantine;
 
-    private RulesContext ctx = new RulesContext();
+    private SimpleRulesContext ctx = new SimpleRulesContext();
 
     /*
     Not Java convention, but Emulating Scala

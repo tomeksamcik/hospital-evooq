@@ -1,8 +1,8 @@
-package ch.evooq.hospital.rules;
+package ch.evooq.hospital.rules.easy;
 
-import static ch.evooq.hospital.model.Condition.Fever;
 import static ch.evooq.hospital.model.Condition.Healthy;
-import static ch.evooq.hospital.model.Cure.Aspirin;
+import static ch.evooq.hospital.model.Condition.Tuberculosis;
+import static ch.evooq.hospital.model.Cure.Antibiotic;
 
 import ch.evooq.hospital.model.Cure;
 import ch.evooq.hospital.model.Patient;
@@ -11,13 +11,13 @@ import org.jeasy.rules.annotation.Action;
 import org.jeasy.rules.annotation.Fact;
 import org.jeasy.rules.annotation.Rule;
 
-@Rule(description = "Aspirin cures Fever")
-public class AspirinRule {
+@Rule(description = "Antibiotic cures Tuberculosis")
+public class AntibioticRule {
 
     @org.jeasy.rules.annotation.Condition
     public boolean canPatientBeCured(@Fact("patient") Patient patient, @Fact("cures") List<Cure> cures) {
-        return cures.contains(Aspirin) &&
-                patient.has(Fever);
+        return cures.contains(Antibiotic) &&
+                patient.has(Tuberculosis);
     }
 
     @Action

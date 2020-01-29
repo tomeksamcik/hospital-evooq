@@ -26,5 +26,4 @@ public class Patient {
     public boolean isHealthy() {
         return condition == Healthy;
     }
-
 }
