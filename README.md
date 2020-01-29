@@ -56,3 +56,4 @@ Aspirin and Insulin.
   - The `skipOnFirstFailedRule` parameter tells the engine to skip next rules when a rule fails
   - The `skipOnFirstNonTriggeredRule` parameter tells the engine to skip next rules a rule is not triggered
   - The `rulePriorityThreshold` parameter tells the engine to skip next rules if priority exceeds the defined threshold
+- Apart from [EasyRule](https://github.com/j-easy/easy-rules) the app can also run on a `SimpleRuleContext` which is much quicker
