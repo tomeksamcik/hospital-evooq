@@ -8,7 +8,9 @@ import java.util.function.Consumer;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Builder
 @RequiredArgsConstructor
 public class Rule {
@@ -21,6 +23,7 @@ public class Rule {
     private final BiPredicate<Patient, List<Cure>> when;
 
     public void apply(Patient patient, List<Cure> cures) {
+        log.debug("Applying rule: {}", description);
         if (when.test(patient, cures)) {
             then.accept(patient);
         }
