@@ -1,6 +1,8 @@
 package ch.evooq.hospital.rules;
 
-import ch.evooq.hospital.model.Condition;
+import static ch.evooq.hospital.model.Condition.Diabetes;
+import static ch.evooq.hospital.model.Cure.Insulin;
+
 import ch.evooq.hospital.model.Cure;
 import ch.evooq.hospital.model.Patient;
 import java.util.List;
@@ -13,12 +15,12 @@ public class InsulinRule {
 
     @org.jeasy.rules.annotation.Condition
     public boolean canPatientBePreventedFromDying(@Fact("patient") Patient patient, @Fact("cures") List<Cure> cures) {
-        return cures.contains(Cure.Insulin) &&
-                patient.has(Condition.Diabetes);
+        return cures.contains(Insulin) &&
+                patient.has(Diabetes);
     }
 
     @Action
     public void preventFromDying(@Fact("patient") Patient patient) {
-        patient.setCondition(Condition.Diabetes);
+        patient.setCondition(Diabetes);
     }
 }

@@ -34,15 +34,15 @@ public class QuarantineTest {
     @Test
     @DisplayName("Valid patient list will be correctly interpreted")
     public void testCorrectPatientList() throws InvalidInputException {
-        quarantine = new Quarantine(Some("F,H,D,D,D,H,T"), Some(""), ctx);
-        assertThat(quarantine.report(), equalTo("F:1,H:2,D:3,T:1,X:0"));
+        quarantine = new Quarantine(Some("F,H,D,D,D,H,T"), Some("I"), ctx);
+        assertThat(quarantine.cure(), equalTo("F:1,H:2,D:3,T:1,X:0"));
     }
 
     @Test
     @DisplayName("Invalid patient list will be correctly interpreted")
     public void testIncorrectPatientList() throws InvalidInputException {
-        quarantine = new Quarantine(Some("F,H,D,D,X,Y,Z"), Some(""), ctx);
-        assertThat(quarantine.report(), equalTo("F:1,H:1,D:2,T:0,X:1"));
+        quarantine = new Quarantine(Some("F,H,D,D,X,Y,Z"), Some("I"), ctx);
+        assertThat(quarantine.cure(), equalTo("F:1,H:1,D:2,T:0,X:1"));
     }
 
     @Nested

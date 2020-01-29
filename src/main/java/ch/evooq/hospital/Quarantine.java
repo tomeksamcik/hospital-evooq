@@ -1,5 +1,9 @@
 package ch.evooq.hospital;
 
+import static ch.evooq.hospital.Parser.parseCures;
+import static ch.evooq.hospital.Parser.parsePatients;
+import static ch.evooq.hospital.Reporter.report;
+
 import ch.evooq.hospital.model.Cure;
 import ch.evooq.hospital.model.Patient;
 import ch.evooq.hospital.rules.RulesContext;
@@ -27,8 +31,8 @@ class Quarantine {
             throws InvalidInputException {
         this.rulesContext = rulesContext;
 
-        this.patients = Parser.parsePatients(subjects);
-        this.cures = Parser.parseCures(curesCodes);
+        this.patients = parsePatients(subjects);
+        this.cures = parseCures(curesCodes);
 
         if (patients.isEmpty()) {
             throw new InvalidInputException();
@@ -39,10 +43,6 @@ class Quarantine {
 
     String cure() {
         patients.forEach(p -> rulesContext.applyRules(p, cures));
-        return report();
-    }
-
-    String report() {
-        return Reporter.report(patients);
+        return report(patients);
     }
 }

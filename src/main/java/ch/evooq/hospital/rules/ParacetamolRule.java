@@ -1,6 +1,9 @@
 package ch.evooq.hospital.rules;
 
-import ch.evooq.hospital.model.Condition;
+import static ch.evooq.hospital.model.Condition.Fever;
+import static ch.evooq.hospital.model.Condition.Healthy;
+import static ch.evooq.hospital.model.Cure.Paracetamol;
+
 import ch.evooq.hospital.model.Cure;
 import ch.evooq.hospital.model.Patient;
 import java.util.List;
@@ -13,12 +16,12 @@ public class ParacetamolRule {
 
     @org.jeasy.rules.annotation.Condition
     public boolean canPatientBeCured(@Fact("patient") Patient patient, @Fact("cures") List<Cure> cures) {
-        return cures.contains(Cure.Paracetamol) &&
-                patient.has(Condition.Fever);
+        return cures.contains(Paracetamol) &&
+                patient.has(Fever);
     }
 
     @Action
     public void cure(@Fact("patient") Patient patient) {
-        patient.setCondition(Condition.Healthy);
+        patient.setCondition(Healthy);
     }
 }
