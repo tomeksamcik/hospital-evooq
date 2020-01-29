@@ -1,6 +1,5 @@
 package ch.evooq.hospital.rules.simple;
 
-import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,5 +11,5 @@ import lombok.Singular;
 public class Rules {
 
     @Getter @Singular
-    private List<Rule> rules = new ArrayList<>();
+    private List<Rule> rules;
 }
