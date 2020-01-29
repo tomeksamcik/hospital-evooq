@@ -14,7 +14,6 @@ import static ch.evooq.hospital.rules.simple.FlyingSpaghettiMonsterRule.miracleH
 import ch.evooq.hospital.model.Cure;
 import ch.evooq.hospital.model.Patient;
 import ch.evooq.hospital.rules.RulesContext;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,56 +21,57 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SimpleRulesContext implements RulesContext {
 
-    private final List<Rule> rules = new ArrayList<>();
+    private Rules rules;
 
     public SimpleRulesContext() {
         registerRules();
     }
 
     public void applyRules(Patient patient, List<Cure> cures) {
-        rules.forEach(rule -> {
+        rules.getRules().forEach(rule -> {
             log.debug("Applying rule: {}", rule.getDescription());
             rule.apply(patient, cures);
         });
     }
 
     private void registerRules() {
-        rules.add(Rule.builder()
+        rules = new Rules()
+            .add(Rule.builder()
                 .description("Aspirin cures Fever")
                 .condition((patient, cures) -> cures.contains(Aspirin) && patient.has(Fever))
                 .action(patient -> patient.setCondition(Healthy))
-                .build());
-        rules.add(Rule.builder()
+                .build())
+            .add(Rule.builder()
                 .description("Antibiotic cures Tuberculosis")
                 .condition((patient, cures) -> cures.contains(Antibiotic) && patient.has(Tuberculosis))
                 .action(patient -> patient.setCondition(Healthy))
-                .build());
-        rules.add(Rule.builder()
+                .build())
+            .add(Rule.builder()
                 .description("Insulin prevents diabetic subject from dying, does not cure Diabetes")
                 .condition((patient, cures) -> cures.contains(Insulin) && patient.has(Diabetes))
                 .action(patient -> patient.setCondition(Diabetes))
-                .build());
-        rules.add(Rule.builder()
+                .build())
+            .add(Rule.builder()
                 .description("Patient with Diabetes dies without Insuline")
                 .condition((patient, cures) -> !cures.contains(Insulin) && patient.has(Diabetes))
                 .action(patient -> patient.setCondition(Dead))
-                .build());
-        rules.add(Rule.builder()
+                .build())
+            .add(Rule.builder()
                 .description("If insulin is mixed with antibiotic, healthy people catch Fever")
                 .condition((patient, cures) -> cures.contains(Insulin) && cures.contains(Antibiotic) && patient.isHealthy())
                 .action(patient -> patient.setCondition(Fever))
-                .build());
-        rules.add(Rule.builder()
+                .build())
+            .add(Rule.builder()
                 .description("Paracetamol cures Fever")
                 .condition((patient, cures) -> cures.contains(Paracetamol) && patient.has(Fever))
                 .action(patient -> patient.setCondition(Healthy))
-                .build());
-        rules.add(Rule.builder()
+                .build())
+            .add(Rule.builder()
                 .description("Paracetamol kills subject if mixed with aspirin")
                 .condition((patient, cures) -> cures.contains(Paracetamol) && cures.contains(Aspirin))
                 .action(patient -> patient.setCondition(Dead))
-                .build());
-        rules.add(Rule.builder()
+                .build())
+            .add(Rule.builder()
                 .description("Spaghetti Monster revives dead man")
                 .condition((patient, cures) -> patient.isDead() && miracleHappens())
                 .action(patient -> patient.setCondition(Healthy))
