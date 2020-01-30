@@ -23,9 +23,12 @@ public class Rule {
     private final BiPredicate<Patient, List<Cure>> when;
 
     public void apply(Patient patient, List<Cure> cures) {
-        log.debug("Applying rule: {}", description);
         if (when.test(patient, cures)) {
-            then.accept(patient);
+            log.debug("Applying rule: {} on {}", description, patient);
+            if (then != null) {
+                then.accept(patient);
+                log.debug("Rule outcome: {}", patient);
+            }
         }
     }
 }

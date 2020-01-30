@@ -26,4 +26,12 @@ public class Patient {
     public boolean isHealthy() {
         return condition == Healthy;
     }
+
+    public void willBe(Condition condition) {
+        this.condition = condition;
+    }
+
+    public void willHave(Condition condition) {
+        this.condition = condition;
+    }
 }
