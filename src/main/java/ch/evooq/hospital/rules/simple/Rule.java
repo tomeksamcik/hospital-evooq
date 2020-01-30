@@ -24,7 +24,7 @@ public class Rule {
 
     public void apply(Patient patient, List<Cure> cures) {
         if (when.test(patient, cures)) {
-            log.debug("Applying rule: {} on {}", description, patient);
+            log.debug("Applying rule: {} on {} and {}", description, patient, cures);
             if (then != null) {
                 then.accept(patient);
                 log.debug("Rule outcome: {}", patient);
