@@ -188,6 +188,7 @@ public class QuarantineTest {
                             .recover(e -> ""))
                     .collect(Collectors.toList());
             assertThat(results, hasItem("F:0,H:1,D:0,T:0,X:0"));
+            Logger.getRootLogger().setLevel(Level.toLevel("DEBUG"));
         }
     }
 }
