@@ -10,7 +10,6 @@ import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,7 +24,6 @@ public class Rule {
     @Builder.Default
     private final Optional<Consumer<Patient>> then = None();
 
-    @NonNull
     private final BiPredicate<Patient, List<Cure>> when;
 
     public static RuleBuilder when(BiPredicate<Patient, List<Cure>> when) {
