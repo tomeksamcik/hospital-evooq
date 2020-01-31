@@ -1,5 +1,6 @@
 package ch.evooq.hospital.rules.simple;
 
+import static ch.evooq.hospital.Utils.Some;
 import static ch.evooq.hospital.model.Condition.Dead;
 import static ch.evooq.hospital.model.Condition.Diabetes;
 import static ch.evooq.hospital.model.Condition.Fever;
@@ -34,34 +35,34 @@ public class SimpleRulesContext implements RulesContext {
                 .rule(Rule.builder()
                         .description("Aspirin cures Fever")
                         .when((patient, cures) -> cures.contains(Aspirin) && patient.has(Fever))
-                        .then(patient -> patient.willBe(Healthy)).build())
+                        .then(Some(patient -> patient.willBe(Healthy))).build())
                 .rule(Rule.builder()
                         .description("Antibiotic cures Tuberculosis")
                         .when((patient, cures) -> cures.contains(Antibiotic) && patient.has(Tuberculosis))
-                        .then(patient -> patient.willBe(Healthy)).build())
+                        .then(Some(patient -> patient.willBe(Healthy))).build())
                 .rule(Rule.builder()
                         .description("Insulin prevents diabetic subject from dying, does not cure Diabetes")
                         .when((patient, cures) -> cures.contains(Insulin) && patient.has(Diabetes))
-                        .then(patient -> patient.willHave(Diabetes)).build())
+                        .then(Some(patient -> patient.willHave(Diabetes))).build())
                 .rule(Rule.builder()
                         .description("Patient with Diabetes dies without Insulin")
                         .when((patient, cures) -> !cures.contains(Insulin) && patient.has(Diabetes))
-                        .then(patient -> patient.willBe(Dead)).build())
+                        .then(Some(patient -> patient.willBe(Dead))).build())
                 .rule(Rule.builder()
                         .description("If insulin is mixed with antibiotic, healthy people catch Fever")
                         .when((patient, cures) -> cures.contains(Insulin) && cures.contains(Antibiotic) && patient.isHealthy())
-                        .then(patient -> patient.willHave(Fever)).build())
+                        .then(Some(patient -> patient.willHave(Fever))).build())
                 .rule(Rule.builder()
                         .description("Paracetamol cures Fever")
                         .when((patient, cures) -> cures.contains(Paracetamol) && patient.has(Fever))
-                        .then(patient -> patient.willBe(Healthy)).build())
+                        .then(Some(patient -> patient.willBe(Healthy))).build())
                 .rule(Rule.builder()
                         .description("Paracetamol kills subject if mixed with aspirin")
                         .when((patient, cures) -> cures.contains(Paracetamol) && cures.contains(Aspirin))
-                        .then(patient -> patient.willBe(Dead)).build())
+                        .then(Some(patient -> patient.willBe(Dead))).build())
                 .rule(Rule.builder()
                         .description("Spaghetti Monster revives dead man")
                         .when((patient, cures) -> patient.isDead() && miracleHappens())
-                        .then(patient -> patient.willBe(Healthy)).build()).build();
+                        .then(Some(patient -> patient.willBe(Healthy))).build()).build();
     }
 }

@@ -1,6 +1,6 @@
 package ch.evooq.hospital;
 
-import static ch.evooq.hospital.QuarantineTest.Some;
+import static ch.evooq.hospital.Utils.Some;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
