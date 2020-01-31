@@ -32,6 +32,10 @@ public class Rule {
         return builder().when(when);
     }
 
+    private static RuleBuilder builder() {
+        return new RuleBuilder();
+    }
+
     public void apply(Patient patient, List<Cure> cures) {
         if (when.test(patient, cures)) {
             log.debug("Applying rule: {} on {} and {}", description, patient, cures);
