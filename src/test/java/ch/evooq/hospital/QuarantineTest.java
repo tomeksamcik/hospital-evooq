@@ -30,30 +30,30 @@ public class QuarantineTest {
 
     private static Stream<Arguments> provideSubjectsAndCures() {
         return Stream.of(
-                Arguments.of("D", "", "F:0,H:0,D:0,T:0,X:1"),
-                Arguments.of("F", "P", "F:0,H:1,D:0,T:0,X:0"),
-                Arguments.of("F", "As", "F:0,H:1,D:0,T:0,X:0"),
-                Arguments.of("T", "An", "F:0,H:1,D:0,T:0,X:0"),
-                Arguments.of("D", "I", "F:0,H:0,D:1,T:0,X:0"),
-                Arguments.of("H", "I,An", "F:1,H:0,D:0,T:0,X:0"),
-                Arguments.of("H", "P,As", "F:0,H:0,D:0,T:0,X:1"),
-                Arguments.of("D", "I,An", "F:0,H:0,D:1,T:0,X:0"),
-                Arguments.of("F", "P,As", "F:0,H:0,D:0,T:0,X:1"),
-                Arguments.of("H", "I,An,P", "F:0,H:1,D:0,T:0,X:0"),
-                Arguments.of("T", "I,An", "F:1,H:0,D:0,T:0,X:0"),
-                Arguments.of("T", "I,An,P", "F:0,H:1,D:0,T:0,X:0"),
-                Arguments.of("F,H,H,T", "", "F:1,H:2,D:0,T:1,X:0"),
-                Arguments.of("F,H,X,Y,Z", "", "F:1,H:1,D:0,T:0,X:1"),
-                Arguments.of("F,H,D,D,D,H,T", "", "F:1,H:2,D:0,T:1,X:3"),
-                Arguments.of("F,H,D,D,D,H,T", "I,An", "F:4,H:0,D:3,T:0,X:0"),
-                Arguments.of("F,H,D,D,D,H,T", "P,As", "F:0,H:0,D:0,T:0,X:7")
+                Arguments.of("D", "", "F:0,H:0,D:0,T:0,X:1", "Patient with Diabetes will die without Insulin"),
+                Arguments.of("F", "P", "F:0,H:1,D:0,T:0,X:0", "Patient with Fever will be cured with Paracetamol"),
+                Arguments.of("F", "As", "F:0,H:1,D:0,T:0,X:0", "Patient with Fever will be cured with Aspirin"),
+                Arguments.of("T", "An", "F:0,H:1,D:0,T:0,X:0", "Patient with Tuberculosis will be cured with Antibiotic"),
+                Arguments.of("D", "I", "F:0,H:0,D:1,T:0,X:0", "Patient with Diabetes will not die if cured with Insulin"),
+                Arguments.of("H", "I,An", "F:1,H:0,D:0,T:0,X:0", "Patient that is healthy will catch Fever then treated with Insulin and Antibiotic"),
+                Arguments.of("H", "P,As", "F:0,H:0,D:0,T:0,X:1", "Patient will die then cured with Paracetamol and Aspirin"),
+                Arguments.of("D", "I,An", "F:0,H:0,D:1,T:0,X:0", "Patient with Diabetes cured with Insulin and Antibiotic will not die and will not catch Fever"),
+                Arguments.of("F", "P,As", "F:0,H:0,D:0,T:0,X:1", "Patient with Fever cured with Paracetamol and Aspirin will not recover, but die instead"),
+                Arguments.of("H", "I,An,P", "F:0,H:1,D:0,T:0,X:0", "Patient that is Healthy will first catch Fever and then recover then treated with Insulin, Paracetamol and Antibiotic"),
+                Arguments.of("T", "I,An", "F:1,H:0,D:0,T:0,X:0", "Patient with Tuberculosis cured with Insulin and Antibiotic will first recover from Tuberculosis and then catch Fever"),
+                Arguments.of("T", "I,An,P", "F:0,H:1,D:0,T:0,X:0", "Patient with Tuberculosis cured with Insulin, Antibiotic and Paracetamol will first recover from Tuberculosis, then catch Fever and then recover"),
+                Arguments.of("F,H,H,T", "", "F:1,H:2,D:0,T:1,X:0", "Valid patient list will be correctly interpreted"),
+                Arguments.of("F,H,X,Y,Z", "", "F:1,H:1,D:0,T:0,X:1", "Invalid patient list will be correctly interpreted"),
+                Arguments.of("F,H,D,D,D,H,T", "", "F:1,H:2,D:0,T:1,X:3", "Some patients will die without treatment"),
+                Arguments.of("F,H,D,D,D,H,T", "I,An", "F:4,H:0,D:3,T:0,X:0", "Some patients will be cured from Tuberculosis, some won't die from Diabetes, but all healthy will catch Fever"),
+                Arguments.of("F,H,D,D,D,H,T", "P,As", "F:0,H:0,D:0,T:0,X:7", "Some patients will be cured from Fever, but eventually all will die")
         );
     }
 
+    @ParameterizedTest(name = "{3}")
     @DisplayName("Parametrized tests")
     @MethodSource("provideSubjectsAndCures")
-    @ParameterizedTest(name = "Patient(s) with [{0}] cured with [{1}] should result with [{2}]")
-    public void testPatients(String subjects, String cures, String expected) throws InvalidInputException {
+    public void testPatients(String subjects, String cures, String expected, String display) throws InvalidInputException {
         quarantine = new Quarantine(Some(subjects), Some(cures), ctx);
         assertThat(quarantine.cure(), equalTo(expected));
     }
