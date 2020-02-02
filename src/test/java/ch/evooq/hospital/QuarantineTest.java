@@ -52,7 +52,7 @@ public class QuarantineTest {
 
     @DisplayName("Parametrized tests")
     @MethodSource("provideSubjectsAndCures")
-    @ParameterizedTest(name = "With [{0}] cured with [{1}] should result with [{2}]")
+    @ParameterizedTest(name = "Patient(s) with [{0}] cured with [{1}] should result with [{2}]")
     public void testPatients(String subjects, String cures, String expected) throws InvalidInputException {
         quarantine = new Quarantine(Some(subjects), Some(cures), ctx);
         assertThat(quarantine.cure(), equalTo(expected));
@@ -61,7 +61,7 @@ public class QuarantineTest {
     private static final int EXECUTION_MULTIPLIER = 2;
 
     @Test
-    @DisplayName("That is Dead will occasionally be resurrected by the Flying Spaghetti Monster")
+    @DisplayName("Dead patient will occasionally be resurrected by the Flying Spaghetti Monster")
     public void testResurrection() {
         /*
         Muting logs to speed up execution
